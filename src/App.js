@@ -3,6 +3,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Layout from './pages/layout.js';
+import '@fortawesome/fontawesome-free/css/all.css';
+import Todo from './pages/todo';
 
 import {
 Link,
@@ -26,6 +28,9 @@ function App() {
             <Switch>
               <Route path="/" exact>
                 <h1>Hello React</h1>
+              </Route>
+              <Route path ="/todo">
+                <Todo />
               </Route>
               <Route path="/counter" >
                 <Counter />
