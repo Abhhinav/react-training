@@ -13,20 +13,28 @@ Route
  } from 'react-router-dom';
 
 import Counter from './components/counter.js'
+import MultipleStatePropsUpdate from './components/state-mutiple-props-update';
+import MultipleStateUpdate from './components/stateupdate-multiple';
 
 function App() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <Router>
         <Layout />
         
-          <div className="container-fluid">
+          <div className="content">
             <Switch>
               <Route path="/" exact>
                 <h1>Hello React</h1>
               </Route>
               <Route path="/counter" >
                 <Counter />
+              </Route>
+              <Route path="/counter-multiple" >
+                <MultipleStateUpdate />
+              </Route>
+              <Route path="/counter-multiple-props" >
+                <MultipleStatePropsUpdate />
               </Route>
             </Switch>
           </div>
