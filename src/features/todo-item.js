@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react'
+import ProgressBar from '../components/progress-bar';
 
 export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle}) {
     const [edit, toggleEdit] = useState(false);
@@ -11,7 +12,8 @@ export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle})
         }
     }
 
-    const handleEdit = (todo) => {
+    const handleEdit = () => {
+        //PROMPT EDIT
         // let title = prompt("Enter new Title!", todo.title);
         // if(!title) 
         // return;
@@ -26,10 +28,11 @@ export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle})
     const handleKeyUp = (e) => {
         //Enter = 13
         //Esc = 27
+
         if(e.keyCode === 13){
             onTodoEdit(titleRef.current.value, todo.id);
             toggleEdit(ps => !ps);
-        } else if(e.keyCode == 27) {
+        } else if(e.keyCode === 27) {
             // toggleEdit(!edit)
             // toggleEdit(p => {return !p});
             toggleEdit(ps => !ps);
@@ -57,6 +60,11 @@ export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle})
           <i onClick={() => handleEdit(todo)} className="fas fa-edit p-4"></i>
         </div>
       </div>
+      <ProgressBar
+        percent={todo.percentage_completed} 
+        width={400}
+        height={20}
+      />
     </div>
   )
 }
