@@ -23,7 +23,7 @@ export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle})
   return (
     <div key={todo.id} className="card todo-item">
     <span onDoubleClick={handleToggle} className = "todo-title">{todo.title}</span>
-    <div class="d-flex justify-content-between">
+    <div className="d-flex justify-content-between">
         <div>
           { todo.completed 
               ? <span className="badge badge-success">Completed</span> 
