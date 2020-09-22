@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 
 export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle}) {
+    const [edit, toggleEdit] = useState(false);
+    const titleRef = useRef();
     const handleDelete = () => {
         let result = window.confirm("Do you really wish to delete it?");
     
@@ -10,19 +12,40 @@ export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle})
     }
 
     const handleEdit = (todo) => {
-        let title = prompt("Enter new Title!", todo.title);
-        if(!title) 
-        return;
-        onTodoEdit(title, todo.id);
+        // let title = prompt("Enter new Title!", todo.title);
+        // if(!title) 
+        // return;
+        // onTodoEdit(title, todo.id);
+        toggleEdit(ps => !ps);
     }
 
     const handleToggle = () => {
         onTodoToggle(todo);
     }
 
+    const handleKeyUp = (e) => {
+        //Enter = 13
+        //Esc = 27
+        if(e.keyCode === 13){
+            onTodoEdit(titleRef.current.value, todo.id);
+            toggleEdit(ps => !ps);
+        } else if(e.keyCode == 27) {
+            // toggleEdit(!edit)
+            // toggleEdit(p => {return !p});
+            toggleEdit(ps => !ps);
+          }
+    }
+
   return (
     <div key={todo.id} className="card todo-item">
-    <span onDoubleClick={handleToggle} className = "todo-title">{todo.title}</span>
+     { 
+        !edit &&
+        <span onDoubleClick={handleToggle} className = "todo-title">{todo.title}</span>
+     }
+     { 
+        edit &&
+        <input onKeyUp={handleKeyUp} ref={titleRef} type="text" defaultValue={todo.title} />
+     }
     <div className="d-flex justify-content-between">
         <div>
           { todo.completed 
