@@ -54,3 +54,8 @@
 .todo-item:nth-child(1) {
   margin-top: 10px;
 }
+
+.todo-title {
+  user-select: none;
+  cursor: pointer;
+}

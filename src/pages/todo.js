@@ -42,12 +42,22 @@ export default function Todo() {
         setTodos([...updatedtodos])
     }
 
+    const onTodoToggle = (todo) => {
+        let updatedtodos = todos.map(t => {
+            if (todo.id === t.id)
+            todo.completed = !todo.completed;
+            return t;
+        });
+
+        setTodos([...updatedtodos])
+    }
+
     return (
     <TodoApp>
       <div className="container mt-5 vh-100">
         <h2>Todos</h2>
         <TodoForm onTodoAdded={onTodoAdded} />
-        <TodoList data={todos} onTodoDelete={onTodoDelete} onTodoEdit={onTodoEdit} />
+        <TodoList data={todos} onTodoDelete={onTodoDelete} onTodoEdit={onTodoEdit} onTodoToggle={onTodoToggle} />
       </div>
     </TodoApp>
   )

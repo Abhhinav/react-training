@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TodoItem({todo,onTodoDelete, onTodoEdit}) {
+export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle}) {
     const handleDelete = () => {
         let result = window.confirm("Do you really wish to delete it?");
     
@@ -16,9 +16,13 @@ export default function TodoItem({todo,onTodoDelete, onTodoEdit}) {
         onTodoEdit(title, todo.id);
     }
 
+    const handleToggle = () => {
+        onTodoToggle(todo);
+    }
+
   return (
     <div key={todo.id} className="card todo-item">
-    {todo.title}
+    <span onDoubleClick={handleToggle} className = "todo-title">{todo.title}</span>
     <div class="d-flex justify-content-between">
         <div>
           { todo.completed 
