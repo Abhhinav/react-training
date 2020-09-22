@@ -32,8 +32,14 @@ export default function Todo() {
         setTodos([...remainingTodos]);
   }
 
-    const onTodoEdit = (todo) => {
-        alert(todo.title);
+    const onTodoEdit = (title, id) => {
+        let updatedtodos = todos.map(todo => {
+            if (todo.id === id)
+            todo.title = title;
+            return todo;
+        });
+
+        setTodos([...updatedtodos])
     }
 
     return (

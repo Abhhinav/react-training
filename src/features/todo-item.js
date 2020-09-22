@@ -9,8 +9,11 @@ export default function TodoItem({todo,onTodoDelete, onTodoEdit}) {
         }
     }
 
-    const handleEdit = () => {
-        onTodoEdit(todo);
+    const handleEdit = (todo) => {
+        let title = prompt("Enter new Title!", todo.title);
+        if(!title) 
+        return;
+        onTodoEdit(title, todo.id);
     }
 
   return (
@@ -24,7 +27,7 @@ export default function TodoItem({todo,onTodoDelete, onTodoEdit}) {
         </div>
         <div className="d-flex justify-content-between">
           <i onClick={handleDelete} className="p-4 fas fa-trash"></i>
-          <i onClick={handleEdit} className="fas fa-edit p-4"></i>
+          <i onClick={() => handleEdit(todo)} className="fas fa-edit p-4"></i>
         </div>
       </div>
     </div>
