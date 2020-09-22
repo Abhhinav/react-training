@@ -7,7 +7,7 @@ export default function MultipleStateUpdate() {
   const [isUpdated, setIsUpdating] = useState(false);
 
   const incr = () => {
-    if (error.trim() != "") {
+    if (error.trim() !== "") {
       setError("");
     }
 
@@ -30,7 +30,7 @@ export default function MultipleStateUpdate() {
   }
 
   const decr = () => {
-    if (counter == 0) {
+    if (counter === 0) {
       setError("Counter should not be Negative!");
       return;
     }

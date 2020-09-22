@@ -1,13 +1,32 @@
 import React from 'react'
 
-export default function TodoItem({todo,onTodoDelete}) {
+export default function TodoItem({todo,onTodoDelete, onTodoEdit}) {
     const handleDelete = () => {
-      onTodoDelete(todo);
+        let result = window.confirm("Do you really wish to delete it?");
+    
+        if(result){
+        onTodoDelete(todo);
+        }
     }
+
+    const handleEdit = () => {
+        onTodoEdit(todo);
+    }
+
   return (
-    <li key={todo.id}>
+    <div key={todo.id} className="card todo-item">
     {todo.title}
-    <i onClick={handleDelete} className="fas fa-trash"></i>
-  </li>
+    <div class="d-flex justify-content-between">
+        <div>
+          { todo.completed 
+              ? <span className="badge badge-success">Completed</span> 
+              : <span className="badge badge-warning">Pending</span>}
+        </div>
+        <div className="d-flex justify-content-between">
+          <i onClick={handleDelete} className="p-4 fas fa-trash"></i>
+          <i onClick={handleEdit} className="fas fa-edit p-4"></i>
+        </div>
+      </div>
+    </div>
   )
 }

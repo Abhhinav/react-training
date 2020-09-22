@@ -36,7 +36,7 @@ export default function MultipleStatePropsUpdate() {
 
     }, 3000);
 
-    if (appState.error.trim() != "") {
+    if (appState.error.trim() !== "") {
         setState({
           ...appState,  // Get old properties
           error: ""     // Overwrite new ones
@@ -47,7 +47,7 @@ export default function MultipleStatePropsUpdate() {
   }
 
   const decr = () => {
-    if (appState.counter == 0) {
+    if (appState.counter === 0) {
       setState({
         ...appState,
         error: "Counter should not be Negative!"

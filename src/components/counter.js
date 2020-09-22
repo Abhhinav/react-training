@@ -11,7 +11,7 @@ export default function Counter() {
 
     function onIncrement () {
       //counter = counter + 1;   // WILL NOT WORK
-      if(counter ==0){
+      if(counter === 0){
           setError("");
       }
       setCounter(counter + 1);
@@ -19,7 +19,7 @@ export default function Counter() {
     
      function onDecrement () {
       //counter = counter + 1;   // WILL NOT WORK
-      if (counter == 0){
+      if (counter === 0){
         setError("Counter can't be Negative!");
         return;
       }
