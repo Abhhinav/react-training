@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import TodoApp from '../features/todo-app';
 import TodoFilter from '../features/todo-filter';
 import TodoForm from '../features/todo-form';
@@ -6,6 +6,11 @@ import TodoList from '../features/todo-list';
 import Context from '../context/context';
 
 const API_TODOS = "https://jsonplaceholder.typicode.com/todos/";
+
+const DATA = {
+  theme: "Dark",
+  language: "English"
+};
 
 export default function Todo() {
 //   const [todos, setTodos] = useState(
@@ -21,7 +26,6 @@ const [todos, setTodos] = useState([]);
 const [filteredTodos, setFilteredTodos] = useState([]);
 const [filter, setFilter] = useState("all");
 const [isLoaded, setIsLoaded] = useState(false);
-const { global_data, setGlobalData } = useContext(Context);
 
 useEffect(()=> {
     // let resultPromise = fetch(API_TODOS);
@@ -148,14 +152,18 @@ useEffect(()=> {
       //This should update the theme in context
       setGlobalData({
         ...global_data,
-        theme: global_data.theme === "Dark" ? "Light" : "Dark"
-      });
+      theme: global_data.theme === "Dark" ? "Light" : "Dark"
+    });
     };
 
+    const [global_data, setGlobalData] = useState(DATA);
+
     return (
+  <Context.Provider value={{global_data, setGlobalData}}>
     <TodoApp>
+      {global_data.language} - {global_data.theme}
       <div className="container mt-5 vh-100">
-        <h2>Todos</h2>
+        <h2><i className="fas fa-shopping-basket">BUCKET LIST</i></h2>
         <div>
           <input
             type="button"
@@ -179,5 +187,6 @@ useEffect(()=> {
         }
       </div>
     </TodoApp>
-  )
+    </Context.Provider>
+    )
 }

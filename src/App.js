@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 //import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -18,22 +18,12 @@ Route
 import Counter from './components/counter.js'
 import MultipleStatePropsUpdate from './components/state-mutiple-props-update';
 import MultipleStateUpdate from './components/stateupdate-multiple';
-import Context from './context/context';
-
-const DATA = {
-  theme: "Dark",
-  language: "English"
-};
 
 function App() {
-  const [global_data, setGlobalData] = useState(DATA);
   const GlobalData = useContext(GlobalContext);
   return (
     <div className="container-fluid">
-      <Context.Provider value={{ global_data, setGlobalData }}>
       {GlobalData.language} - {GlobalData.theme}
-      --------
-      {global_data.language} - {global_data.theme}
       <Router>
         <Layout />
         
@@ -57,7 +47,6 @@ function App() {
             </Switch>
           </div>
       </Router>
-      </Context.Provider>
     </div>
   );
 }
