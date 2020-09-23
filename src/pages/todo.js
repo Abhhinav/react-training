@@ -114,17 +114,17 @@ useEffect(()=> {
         setFilter("pending");
     }
 
+    let todoData = filter === "all" ? todos : filteredTodos;
+
     useEffect(() => {
-      if (filter == "bookmarked") {
+      if (filter === "bookmarked") {
         onfilterBookmarked();
-      } else if (filter == "completed") {
+      } else if (filter === "completed") {
         onfilterCompleted();
-      } else if (filter == "pending") {
+      } else if (filter === "pending") {
         onfilterPending();
       }
     }, [todos])
-    
-    let todoData = filter === "all" ?todos : filteredTodos;
 
     return (
     <TodoApp>

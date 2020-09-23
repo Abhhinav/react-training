@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
 
 export default function TodoFilter({onfilterAll, onfilterBookmarked, onfilterCompleted, onfilterPending}) {
     const [filter, setFilter] = useState("all");
@@ -20,7 +20,7 @@ export default function TodoFilter({onfilterAll, onfilterBookmarked, onfilterCom
         onfilterPending();
     }
     function activeClass(action) {
-        return action == filter ? "bg-success" : "";
+        return action === filter ? "bg-success" : "";
       }
 
   return (
@@ -34,7 +34,7 @@ export default function TodoFilter({onfilterAll, onfilterBookmarked, onfilterCom
         <button name="completed" 
           onClick = {handleCompleted}
           className={`m-1 ${activeClass("completed")}`} >COMPLETED</button>
-        <button name="incomplete" 
+        <button name="pending" 
           onClick={handlePending}
           className={`m-1 ${activeClass("pending")}`} >PENDING</button>
     </div>
