@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import TodoApp from '../features/todo-app';
 import TodoFilter from '../features/todo-filter';
 import TodoForm from '../features/todo-form';
 import TodoList from '../features/todo-list';
+import Context from '../context/context';
 
 const API_TODOS = "https://jsonplaceholder.typicode.com/todos/";
 
@@ -20,6 +21,7 @@ const [todos, setTodos] = useState([]);
 const [filteredTodos, setFilteredTodos] = useState([]);
 const [filter, setFilter] = useState("all");
 const [isLoaded, setIsLoaded] = useState(false);
+const { global_data, setGlobalData } = useContext(Context);
 
 useEffect(()=> {
     // let resultPromise = fetch(API_TODOS);
@@ -142,10 +144,25 @@ useEffect(()=> {
       }
     }, [todos])
 
+    const toggleTheme = () => {
+      //This should update the theme in context
+      setGlobalData({
+        ...global_data,
+        theme: global_data.theme === "Dark" ? "Light" : "Dark"
+      });
+    };
+
     return (
     <TodoApp>
       <div className="container mt-5 vh-100">
         <h2>Todos</h2>
+        <div>
+          <input
+            type="button"
+            value={`Toggle Theme - ${global_data.theme}`}
+            onClick={toggleTheme}
+          />
+        </div>
         <TodoForm onTodoAdded={onTodoAdded} />
         <TodoFilter  onfilterAll={onfilterAll}
         onfilterBookmarked={onfilterBookmarked}
