@@ -11,7 +11,7 @@ export default function TodoForm(prop) {
 
     useEffect(() => {
         titleRef.current.focus();
-    })
+    },[])
 
     const validate = () => {
         if(todoTitle.trim() !== ""){

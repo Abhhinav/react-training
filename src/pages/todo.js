@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import TodoApp from '../features/todo-app';
+import TodoFilter from '../features/todo-filter';
 import TodoForm from '../features/todo-form';
 import TodoList from '../features/todo-list';
 
@@ -16,6 +17,9 @@ export default function Todo() {
 //   )
 
 const [todos, setTodos] = useState([]);
+const [filteredTodos, setFilteredTodos] = useState([]);
+const [filter, setFilter] = useState("all");
+const [isLoaded, setIsLoaded] = useState(false);
 
 useEffect(()=> {
     // let resultPromise = fetch(API_TODOS);
@@ -32,10 +36,12 @@ useEffect(()=> {
         console.log(data);
         let transformedData = data.map(d => {
           d.percentage_completed = Math.floor(Math.random() * 100)+1
+          d.bookmarked = false
           return d;
         })
         setTodos([...transformedData]);
-      })
+        setIsLoaded(true);
+      });
 
   },[])
 
@@ -78,12 +84,66 @@ useEffect(()=> {
         setTodos([...updatedtodos])
     }
 
+    const onTodoBookmark = (todo) => {
+        let updatedtodos = todos.map(t => {
+            if (todo.id === t.id)
+            todo.bookmarked = !todo.bookmarked;
+            return t;
+        });
+
+        setTodos([...updatedtodos])
+    }
+
+    const onfilterAll=() => {
+      setFilteredTodos([]);
+      setFilter("all");
+    }
+    const onfilterBookmarked=() => {
+        let Bookmarked = todos.filter(todo =>todo.bookmarked);
+        setFilteredTodos([...Bookmarked]);
+        setFilter("bookmarked");
+    }
+    const onfilterCompleted=() => {
+        let Completed = todos.filter(todo =>todo.completed);
+        setFilteredTodos([...Completed]);
+        setFilter("completed");
+    }
+    const onfilterPending=() => {
+        let Pending = todos.filter(todo =>!todo.completed);
+        setFilteredTodos([...Pending]);
+        setFilter("pending");
+    }
+
+    useEffect(() => {
+      if (filter == "bookmarked") {
+        onfilterBookmarked();
+      } else if (filter == "completed") {
+        onfilterCompleted();
+      } else if (filter == "pending") {
+        onfilterPending();
+      }
+    }, [todos])
+    
+    let todoData = filter === "all" ?todos : filteredTodos;
+
     return (
     <TodoApp>
       <div className="container mt-5 vh-100">
         <h2>Todos</h2>
         <TodoForm onTodoAdded={onTodoAdded} />
-        <TodoList data={todos} onTodoDelete={onTodoDelete} onTodoEdit={onTodoEdit} onTodoToggle={onTodoToggle} />
+        <TodoFilter  onfilterAll={onfilterAll}
+        onfilterBookmarked={onfilterBookmarked}
+        onfilterCompleted={onfilterCompleted}
+        onfilterPending={onfilterPending} />
+        { !isLoaded && <h4>Loading...</h4>}
+        { isLoaded &&
+            <TodoList 
+            data={todoData} 
+            onTodoEdit={onTodoEdit}
+            onTodoToggle = {onTodoToggle}
+            onTodoBookmark = {onTodoBookmark}
+            onTodoDelete={onTodoDelete} />
+        }
       </div>
     </TodoApp>
   )
