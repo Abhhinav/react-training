@@ -3,7 +3,7 @@ import TodoApp from '../features/todo-app';
 import TodoFilter from '../features/todo-filter';
 import TodoForm from '../features/todo-form';
 import TodoList from '../features/todo-list';
-import Context from '../context/context';
+import Context from '../context/todo-context';
 
 const API_TODOS = "https://jsonplaceholder.typicode.com/todos/";
 
@@ -158,33 +158,36 @@ useEffect(()=> {
 
     const [global_data, setGlobalData] = useState(DATA);
 
+    const todoProvider = {
+      onTodoEdit,
+      onTodoToggle,
+      onTodoBookmark,
+      onTodoDelete
+    }
     return (
   <Context.Provider value={{global_data, setGlobalData}}>
     <TodoApp>
       {global_data.language} - {global_data.theme}
       <div className="container mt-5 vh-100">
-        <h2><i className="fas fa-shopping-basket">BUCKET LIST</i></h2>
-        <div>
+      <div>
           <input
             type="button"
             value={`Toggle Theme - ${global_data.theme}`}
             onClick={toggleTheme}
           />
         </div>
+        <h2><i className="fas fa-shopping-basket">BUCKET LIST</i></h2>
         <TodoForm onTodoAdded={onTodoAdded} />
         <TodoFilter  onfilterAll={onfilterAll}
         onfilterBookmarked={onfilterBookmarked}
         onfilterCompleted={onfilterCompleted}
         onfilterPending={onfilterPending} />
-        { !isLoaded && <h4>Loading...</h4>}
-        { isLoaded &&
-            <TodoList 
-            data={todoData} 
-            onTodoEdit={onTodoEdit}
-            onTodoToggle = {onTodoToggle}
-            onTodoBookmark = {onTodoBookmark}
-            onTodoDelete={onTodoDelete} />
-        }
+          <Context.Provider value = {todoProvider}>
+          { !isLoaded && <h4>Loading...</h4>}
+          { isLoaded &&
+              <TodoList data={todoData} />
+          }
+          </Context.Provider>
       </div>
     </TodoApp>
     </Context.Provider>

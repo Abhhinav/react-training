@@ -1,14 +1,16 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useContext} from 'react'
 import ProgressBar from '../components/progress-bar';
+import Context from '../context/todo-context';
 
-export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle, onTodoBookmark}) {
+export default function TodoItem({todo}) {
     const [edit, toggleEdit] = useState(false);
+    const todoProvider = useContext(Context);
     const titleRef = useRef();
     const handleDelete = () => {
         let result = window.confirm("Do you really wish to delete it?");
     
         if(result){
-        onTodoDelete(todo);
+        todoProvider.onTodoDelete(todo);
         }
     }
 
@@ -22,7 +24,7 @@ export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle, 
     }
 
     const handleToggle = () => {
-        onTodoToggle(todo);
+        todoProvider.onTodoToggle(todo);
     }
 
     const handleKeyUp = (e) => {
@@ -30,7 +32,7 @@ export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle, 
         //Esc = 27
 
         if(e.keyCode === 13){
-            onTodoEdit(titleRef.current.value, todo.id);
+            todoProvider.onTodoEdit(titleRef.current.value, todo.id);
             toggleEdit(ps => !ps);
         } else if(e.keyCode === 27) {
             // toggleEdit(!edit)
@@ -40,7 +42,7 @@ export default function TodoItem({todo, onTodoDelete, onTodoEdit, onTodoToggle, 
     }
 
     const handleBookmark = () => {
-        onTodoBookmark(todo);
+        todoProvider.onTodoBookmark(todo);
     }
 
     let bookmarkClass = todo.bookmarked ? "fas fa-bookmark" : "far fa-bookmark";
