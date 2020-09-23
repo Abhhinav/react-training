@@ -21,7 +21,7 @@ const [filteredTodos, setFilteredTodos] = useState([]);
 const [filter, setFilter] = useState("all");
 const [isLoaded, setIsLoaded] = useState(false);
 
-useEffect(async()=> {
+useEffect(()=> {
     // let resultPromise = fetch(API_TODOS);
     // let response = resultPromise.then(response => {
     //   return response.json();  // This is also a promise
@@ -31,18 +31,21 @@ useEffect(async()=> {
     // })
 
     //ASYNC
-    const response = await fetch(API_TODOS);
-    const data = await response.json();    
+    const fetchData = async() => {
+      const response = await fetch(API_TODOS);
+      const data = await response.json();    
 
-    let transformedData = data.map(d => {
-      d.percentage_completed = Math.floor(Math.random() * 100)+1
-      d.bookmarked = false;
-      return d;
-    })
-    setTodos([...transformedData]);
-    setIsLoaded(true);
-    
-    //FETCH
+      let transformedData = data.map(d => {
+        d.percentage_completed = Math.floor(Math.random() * 100)+1
+        d.bookmarked = false;
+        return d;
+      })
+      setTodos([...transformedData]);
+      setIsLoaded(true);
+    }
+
+    fetchData();
+    //FETCH-PROMISE
     // fetch(API_TODOS)
     //   .then(response => response.json())
     //   .then(data => {

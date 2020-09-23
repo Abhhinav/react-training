@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 //import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Layout from './pages/layout.js';
 import '@fortawesome/fontawesome-free/css/all.css';
 import Todo from './pages/todo';
+import GlobalContext from './context/global-context';
+
 
 import {
 Link,
@@ -19,8 +21,10 @@ import MultipleStatePropsUpdate from './components/state-mutiple-props-update';
 import MultipleStateUpdate from './components/stateupdate-multiple';
 
 function App() {
+  const GlobalData = useContext(GlobalContext);
   return (
     <div className="container-fluid">
+      {GlobalData.language} - {GlobalData.theme}
       <Router>
         <Layout />
         
