@@ -19,8 +19,10 @@ import Counter from './components/counter.js'
 import MultipleStatePropsUpdate from './components/state-mutiple-props-update';
 import MultipleStateUpdate from './components/stateupdate-multiple';
 import UseReducerDemo from './pages/usereducer-demo';
+import { useDocumentTitle } from './hooks/use-document-title';
 
 function App() {
+  useDocumentTitle("Hello React")
   const GlobalData = useContext(GlobalContext);
   return (
     <div className="container-fluid">

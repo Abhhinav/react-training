@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import { useDocumentTitle } from '../hooks/use-document-title';
 
 export default function MultipleStateUpdate() {
+  useDocumentTitle("State Multiple")
   const [counter, setCounter] = useState(0); 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false)

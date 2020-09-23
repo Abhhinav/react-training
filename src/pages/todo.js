@@ -4,6 +4,7 @@ import TodoFilter from '../features/todo-filter';
 import TodoForm from '../features/todo-form';
 import TodoList from '../features/todo-list';
 import Context from '../context/todo-context';
+import { useDocumentTitle } from '../hooks/use-document-title';
 
 const API_TODOS = "https://jsonplaceholder.typicode.com/todos/";
 
@@ -13,6 +14,7 @@ const DATA = {
 };
 
 export default function Todo() {
+  useDocumentTitle("ToDo")
 //   const [todos, setTodos] = useState(
 //     [
 //         {id: 1, title: "Learn Elm", completed: true, percentage_completed: 100},

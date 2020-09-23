@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
+import { useDocumentTitle } from '../hooks/use-document-title';
 
 export default function Counter() {
+  useDocumentTitle("Counter")
     //alert("Function called!");
     // const counterResult = useState(0);
     // const counter = counterResult[0];

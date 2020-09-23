@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import { useDocumentTitle } from '../hooks/use-document-title';
 
 export default function MultipleStatePropsUpdate() {
+  useDocumentTitle("State Multiple Props")
   const [appState, setState] = useState({
     isLoading:false,
     isUpdated: false,
