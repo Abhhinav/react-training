@@ -18,6 +18,7 @@ Route
 import Counter from './components/counter.js'
 import MultipleStatePropsUpdate from './components/state-mutiple-props-update';
 import MultipleStateUpdate from './components/stateupdate-multiple';
+import UseReducerDemo from './pages/usereducer-demo';
 
 function App() {
   const GlobalData = useContext(GlobalContext);
@@ -37,6 +38,9 @@ function App() {
               </Route>
               <Route path="/counter" >
                 <Counter />
+              </Route>
+              <Route path="/usereducer">
+              <UseReducerDemo />
               </Route>
               <Route path="/counter-multiple" >
                 <MultipleStateUpdate />
