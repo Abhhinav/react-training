@@ -21,7 +21,7 @@ const [filteredTodos, setFilteredTodos] = useState([]);
 const [filter, setFilter] = useState("all");
 const [isLoaded, setIsLoaded] = useState(false);
 
-useEffect(()=> {
+useEffect(async()=> {
     // let resultPromise = fetch(API_TODOS);
     // let response = resultPromise.then(response => {
     //   return response.json();  // This is also a promise
@@ -30,18 +30,31 @@ useEffect(()=> {
     //   console.log("data: ", data);
     // })
 
-    fetch(API_TODOS)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        let transformedData = data.map(d => {
-          d.percentage_completed = Math.floor(Math.random() * 100)+1
-          d.bookmarked = false
-          return d;
-        })
-        setTodos([...transformedData]);
-        setIsLoaded(true);
-      });
+    //ASYNC
+    const response = await fetch(API_TODOS);
+    const data = await response.json();    
+
+    let transformedData = data.map(d => {
+      d.percentage_completed = Math.floor(Math.random() * 100)+1
+      d.bookmarked = false;
+      return d;
+    })
+    setTodos([...transformedData]);
+    setIsLoaded(true);
+    
+    //FETCH
+    // fetch(API_TODOS)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log(data);
+    //     let transformedData = data.map(d => {
+    //       d.percentage_completed = Math.floor(Math.random() * 100)+1
+    //       d.bookmarked = false
+    //       return d;
+    //     })
+    //     setTodos([...transformedData]);
+    //     setIsLoaded(true);
+    //   });
 
   },[])
 
