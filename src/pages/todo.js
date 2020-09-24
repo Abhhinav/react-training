@@ -5,8 +5,10 @@ import TodoForm from '../features/todo-form';
 import TodoList from '../features/todo-list';
 import Context from '../context/todo-context';
 import { useDocumentTitle } from '../hooks/use-document-title';
+//import {useFetch} from '../hooks/use-fetch';
 
 const API_TODOS = "https://jsonplaceholder.typicode.com/todos/";
+//const {isLoading, response, error, doFetch} = useFetch(API_TODOS);
 
 const DATA = {
   theme: "Dark",
@@ -28,6 +30,24 @@ const [todos, setTodos] = useState([]);
 const [filteredTodos, setFilteredTodos] = useState([]);
 const [filter, setFilter] = useState("all");
 const [isLoaded, setIsLoaded] = useState(false);
+
+//CUSTOM USE-FETCH
+// useEffect(() => {
+//   doFetch({
+//     method: "get"
+//   });
+// }, []);
+
+// useEffect(() => {
+//   if (!response) return;
+//   let transformedData = response.map(d => {
+//     d.percentage_completed = randomFromRange(25, 100);
+//     d.bookmarked = false;
+//     return d;
+//   });
+//   setTodos([...transformedData]);
+// }, [response])
+
 
 useEffect(()=> {
     // let resultPromise = fetch(API_TODOS);
