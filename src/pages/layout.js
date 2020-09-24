@@ -18,6 +18,7 @@ export default function Layout() {
         </button> */}
         {/* <div id="top-nav" className="collapse navbar-collapse"> */}
             <NavLink className="navbar-brand" to="/todo">Todo</NavLink>
+            <NavLink className="navbar-brand" to="/membership">Membership</NavLink>
             <NavLink className="navbar-brand" to="/counter">Counter</NavLink>
             <NavLink className="navbar-brand" to="/usereducer">USE Reducer</NavLink>
             <NavLink className="navbar-brand" to="/counter-multiple">Counter Multiple State</NavLink>

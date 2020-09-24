@@ -22,6 +22,8 @@ import MultipleStatePropsUpdate from './components/state-mutiple-props-update';
 import MultipleStateUpdate from './components/stateupdate-multiple';
 import UseReducerDemo from './pages/usereducer-demo';
 import { useDocumentTitle } from './hooks/use-document-title';
+import Membership from './pages/membership';
+import Userlist from './features/membership/userlist';
 
 function App() {
   useDocumentTitle("Hello React")
@@ -39,6 +41,12 @@ function App() {
               </Route>
               <Route path ="/todo">
                 <Todo />
+              </Route>
+              <Route path ="/membership">
+                <Membership />
+              </Route>
+              <Route path ="/userlist">
+                <Userlist />
               </Route>
               <Route path="/counter" >
                 <Counter />
