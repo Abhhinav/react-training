@@ -6,6 +6,8 @@ import Layout from './pages/layout.js';
 import '@fortawesome/fontawesome-free/css/all.css';
 import Todo from './pages/todo';
 import GlobalContext from './context/global-context';
+import $ from 'jquery';
+import Popper from 'popper.js';
 
 import {
 Link,

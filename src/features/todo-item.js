@@ -1,5 +1,6 @@
 import React, {useState, useRef, useContext} from 'react'
 import ProgressBar from '../components/progress-bar';
+import StarRating from '../components/star-rating';
 import Context from '../context/todo-context';
 
 export default function TodoItem({todo}) {
@@ -45,6 +46,10 @@ export default function TodoItem({todo}) {
         todoProvider.onTodoBookmark(todo);
     }
 
+    const handleRatingChanged = (rating) => {
+        todoProvider.onRatingChanged(todo.id, rating);
+    }
+
     let bookmarkClass = todo.bookmarked ? "fas fa-bookmark" : "far fa-bookmark";
 
   return (
@@ -54,6 +59,10 @@ export default function TodoItem({todo}) {
             <div>
                 <span onDoubleClick={handleToggle} className="todo-title">{todo.title}</span>
                 <i onClick={handleBookmark} className={`p-4 ${bookmarkClass}`}></i>
+                <StarRating 
+                count={5} 
+                value={todo.rating}
+                onChange={handleRatingChanged} />
             </div>
         }
         { 
@@ -64,7 +73,7 @@ export default function TodoItem({todo}) {
             <div>
             { todo.completed 
                 ? <span className="badge badge-success">Completed</span> 
-                : <span className="badge badge-warning">Pending</span>}
+                : <span className="badge badge-dark">Pending</span>}
             </div>
             <div className="d-flex justify-content-between">
             <i onClick={handleDelete} className="p-4 fas fa-trash"></i>

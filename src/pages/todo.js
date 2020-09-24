@@ -66,6 +66,7 @@ useEffect(()=> {
       let transformedData = data.map(d => {
         d.percentage_completed = Math.floor(Math.random() * 100)+1
         d.bookmarked = false;
+        d.rating = 0;
         return d;
       })
       setTodos([...transformedData]);
@@ -116,6 +117,17 @@ useEffect(()=> {
         });
 
         setTodos([...updatedtodos])
+    }
+
+    const onRatingChanged = (todoId, rating) => {
+      let updatedTodos = todos.map(t => {
+        if (todoId == t.id) {
+          t.rating = rating;
+        }
+        return t;
+      });
+  
+      setTodos([...updatedTodos]);
     }
 
     const onTodoToggle = (todo) => {
@@ -184,7 +196,8 @@ useEffect(()=> {
       onTodoEdit,
       onTodoToggle,
       onTodoBookmark,
-      onTodoDelete
+      onTodoDelete,
+      onRatingChanged
     }
     return (
   <Context.Provider value={{global_data, setGlobalData}}>
